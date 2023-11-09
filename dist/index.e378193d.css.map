@@ -1,0 +1,1 @@
+{"mappings":"AAEA","sources":["src/styles/index.scss"],"sourcesContent":["$color: steelblue;\r\n\r\n.for-reel {\r\n  color: $color;\r\n}"],"names":[],"version":3,"file":"index.e378193d.css.map","sourceRoot":"/__parcel_source_root/"}
