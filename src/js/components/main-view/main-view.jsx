@@ -12,17 +12,7 @@ export const MainView = () => { //the function assigned here, returns the visual
     fetch("https://for-reel-d14227c07855.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
-        const moviesFromApi = data.docs.map((doc) => {
-          return {
-            id: doc._id,
-            title: doc.title,
-            image: doc.image,
-            director: doc.director_name?.[0],
-            genre: doc.genre_name?.[0],
-          };
-        });
-
-        setMovies(moviesFromApi);
+        setMovies(data);
       });
   }, []);
 
