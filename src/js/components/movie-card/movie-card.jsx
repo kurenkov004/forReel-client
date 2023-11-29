@@ -7,15 +7,15 @@ export const MovieCard = ({ movieData, onMovieClick }) => { //destructured props
         onMovieClick(movieData)
       }}
     >
-      {movieData.title}
+      {movieData.Title}
     </div>
   );
 };
 
 //this defines all the prop constraints for MovieCard
 MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string
+  movieData: PropTypes.shape({
+    Title: PropTypes.string
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired
 }
