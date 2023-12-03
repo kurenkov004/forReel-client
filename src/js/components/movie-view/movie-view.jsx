@@ -32,8 +32,12 @@ MovieView.propTypes = {
   expandedMovie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-    Genre: PropTypes.string,
-    Director: PropTypes.string,
-    Image: PropTypes.string
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+    }),
+    ImagePath: PropTypes.string,
   }).isRequired
-}
+};
