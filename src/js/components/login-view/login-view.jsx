@@ -10,8 +10,8 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: username,
-      secret: password
+      Username: username,
+      Password: password
     };
 
     fetch("https://for-reel-d14227c07855.herokuapp.com/login", {
@@ -40,7 +40,7 @@ export const LoginView = ({ onLoggedIn }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        username:
+        Username:
         <input
           type="text"
           value={username}
@@ -49,7 +49,7 @@ export const LoginView = ({ onLoggedIn }) => {
         />
       </label>
       <label>
-        password:
+        Password:
         <input
           type="password"
           value={password}
