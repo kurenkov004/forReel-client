@@ -1,5 +1,12 @@
+
+
 $color: steelblue;
 
 .for-reel {
   color: $color;
 }
+
+$primary: CadetBlue;
+$body-bg: MintCream;
+
+@import '~bootstrap/scss/bootstrap.scss';

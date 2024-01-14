@@ -1,4 +1,6 @@
 import PropTypes from "prop-types"; //imports PropTypes Library
+import "./movie-view.scss";
+import Button from "react-bootstrap/Button";
 
 export const MovieView = ({ expandedMovie, onBackClick }) => {
   return ( //remember, there can only be ONE root element in a component
@@ -22,7 +24,7 @@ export const MovieView = ({ expandedMovie, onBackClick }) => {
         <span>Director: </span>
         <span>{expandedMovie.Director.Name}</span>
       </div>
-      <button onClick={onBackClick}>Back</button>
+      <Button variant="secondary" onClick={onBackClick}>Back</Button>
     </div>
   );
 };
