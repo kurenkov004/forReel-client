@@ -32,49 +32,6 @@ export const MainView = () => { //the function assigned here, returns the visual
       });
   }, [token]);
 
-  // if (!user) {
-  //   return (
-  //     <>
-  //       <LoginView 
-  //         onLoggedIn={(user, token) => {
-  //           setUser(user);
-  //           setToken(token)
-  //         }} />
-  //         or
-  //         <SignupView/>
-  //     </>
-  //   );
-  // }
-
-  // if (selectedMovie) { 
-  //   return (
-  //     <MovieView
-  //       expandedMovie={selectedMovie}
-  //       onBackClick={() => setSelectedMovie(null)} //prop that returns movie state to "null," allowing the "back" button to return user to MainView
-  //     />
-  //   );
-  // }
-
-  // if (movies.length === 0) {
-  //   return <div>The list is empty</div>;
-  // }
-  // return (
-  //   <div>
-  //     <div>
-  //       {movies.map((movie) => (
-  //         <MovieCard //only displays a movie's title
-  //           key={movie.id} //value of key must be unique, helps distinguish between similar elements in the list
-  //           movieData={movie}
-  //           onMovieClick={(newSelectedMovie) => {
-  //             setSelectedMovie(newSelectedMovie);
-  //           }}
-  //         />
-  //       ))}
-  //     </div>
-  //     <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-  //   </div>
-  // );
-
   return (
     <Row className="justify-content-md-center">
       {!user ? (
