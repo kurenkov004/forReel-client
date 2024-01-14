@@ -1,8 +1,14 @@
 import PropTypes from "prop-types"; //imports PropTypes Library
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
 
-export const MovieView = ({ expandedMovie, onBackClick }) => {
+export const MovieView = ({ expandedMovie }) => {
+  const { movieId } = useParams();
+
+  const movie = expandedMovie.find((b) => b.id === movieId)
+
   return ( //remember, there can only be ONE root element in a component
     <div>
       <div>
@@ -24,7 +30,9 @@ export const MovieView = ({ expandedMovie, onBackClick }) => {
         <span>Director: </span>
         <span>{expandedMovie.Director.Name}</span>
       </div>
-      <Button variant="secondary" onClick={onBackClick}>Back</Button>
+      <Link to={`/movies`} >
+        <Button variant="secondary">Back</Button>
+      </Link>
     </div>
   );
 };
