@@ -15,13 +15,6 @@ export const MovieCard = ({ movieData, onMovieClick }) => { //destructured props
         </Button>
       </Card.Body>
     </Card>
-    // <div
-    //   onClick={() => {
-    //     onMovieClick(movieData)
-    //   }}
-    // >
-    //   {movieData.Title}
-    // </div>
   );
 };
 
