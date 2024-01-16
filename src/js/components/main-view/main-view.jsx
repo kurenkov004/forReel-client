@@ -15,7 +15,7 @@ export const MainView = () => { //the function assigned here, returns the visual
   const storedToken = localStorage.getItem("token");
 
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null); // another state variable, sets the initial value to null
+  // const [selectedMovie, setSelectedMovie] = useState(null); // another state variable, sets the initial value to null
   const [user, setUser] = useState(storedUser? storedUser: null);
   const [token, setToken] = useState(storedToken? storedToken: null);
 
@@ -66,7 +66,7 @@ export const MainView = () => { //the function assigned here, returns the visual
             }
           />
           <Route
-            path="/moves/movieId"
+            path="/movies/movieID"
             element={
               <>
                 {user ? (
