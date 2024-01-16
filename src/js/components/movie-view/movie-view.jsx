@@ -1,34 +1,35 @@
 import PropTypes from "prop-types"; //imports PropTypes Library
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+
 import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
 
 export const MovieView = ({ expandedMovie }) => {
-  const { movieId } = useParams();
+  const { movieID } = useParams();
 
-  const movie = expandedMovie.find((b) => b.id === movieId)
+  const movie = expandedMovie.find((b) => b.id === movieID)
 
   return ( //remember, there can only be ONE root element in a component
     <div>
       <div>
-        <img src={expandedMovie.ImagePath} />
+        <img src={movie.ImagePath} />
       </div>
       <div>
         <span>Title: </span>
-        <span>{expandedMovie.Title}</span>
+        <span>{movie.Title}</span>
       </div>
       <div>
         <span>Description: </span>
-        <span>{expandedMovie.Description}</span>
+        <span>{movie.Description}</span>
       </div>
       <div>
         <span>Genre: </span>
-        <span>{expandedMovie.Genre.Name}</span>
+        <span>{movie.Genre.Name}</span>
       </div>
       <div>
         <span>Director: </span>
-        <span>{expandedMovie.Director.Name}</span>
+        <span>{movie.Director.Name}</span>
       </div>
       <Link to={`/movies`} >
         <Button variant="secondary">Back</Button>
