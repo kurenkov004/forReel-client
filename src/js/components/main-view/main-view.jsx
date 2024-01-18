@@ -38,11 +38,11 @@ export const MainView = () => { //the function assigned here, returns the visual
       <Row className="justify-content-md-center">
         <Routes>
           <Route
-            path="/users"
+            path="/"
             element={
               <>
                 {user ? (
-                  <Navigate to="/login" />
+                  <Navigate to="/" />
                 ) : (
                   <Col md={5} >
                     <SignupView/>
@@ -56,7 +56,7 @@ export const MainView = () => { //the function assigned here, returns the visual
             element={
               <>
                 {user ? (
-                  <Navigate to="/login" />
+                  <Navigate to="/" />
                 ) : (
                   <Col md={5}>
                     <LoginView onLoggedIn={(user, token) => {setUser(user); setToken(token)}}/>
