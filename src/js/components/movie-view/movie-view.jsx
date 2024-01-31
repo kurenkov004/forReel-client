@@ -6,9 +6,9 @@ import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
 
 export const MovieView = ({ expandedMovie }) => {
-  const { movieID } = useParams();
+  const { movieId } = useParams();
 
-  const movie = expandedMovie.find((b) => b.id === movieID)
+  const movie = expandedMovie.find((b) => b.id === movieId)
 
   return ( //remember, there can only be ONE root element in a component
     <div>
