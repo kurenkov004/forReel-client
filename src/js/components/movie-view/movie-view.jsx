@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
 
-export const MovieView = ({ expandedMovie }) => {
-  const { movieId } = useParams();
+export const MovieView = ({ movies }) => { // movies in this case is brought in from MainView
+  const { movieId } = useParams(); //fetching the movieId parameter from the  URL
 
-  const movie = expandedMovie.find((b) => b.id === movieId)
+  const movie = movies.find((movie) => movie._id === movieId) //searching through the movies array we fetched from the API to find one movie
 
   return ( //remember, there can only be ONE root element in a component
     <div>
