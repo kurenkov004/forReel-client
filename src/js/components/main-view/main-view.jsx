@@ -3,6 +3,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -39,10 +40,18 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
+      <NavigationBar
+        user={user}
+        onLoggedOut={() => {
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        }}
+      />
       <Row className="justify-content-md-center">
         <Routes>
-          {/* <Route
-            path="/"
+          <Route
+            path="/signup"
             element={
               <>
                 {user ? (
@@ -54,7 +63,7 @@ export const MainView = () => {
                 )}
               </>
             }
-          /> */}
+          />
           <Route
             path="/login"
             element={
@@ -84,7 +93,7 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col>
-                    <MovieView expandedMovie={selectedMovie} />
+                    <MovieView movies={movies} />
                   </Col>
                 )}
               </>
@@ -103,7 +112,7 @@ export const MainView = () => {
                     {movies.map((movie) => (
                       <Col className="mb-5" key={movie.id} md={3}>
                         <MovieCard movieData={movie} />
-                        <Button
+                        {/* <Button
                           variant="primary"
                           type="logout"
                           onClick={() => {
@@ -113,7 +122,7 @@ export const MainView = () => {
                           }}
                         >
                           Logout
-                        </Button>
+                        </Button> */}
                       </Col>
                     ))}
                   </>
@@ -128,13 +137,13 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
+                  <Col>No movies here</Col>
                 ) : (
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-5" key={movie.id} md={3}>
                         <MovieCard movieData={movie} />
-                        <Button
+                        {/* <Button
                           variant="primary"
                           type="logout"
                           onClick={() => {
@@ -144,7 +153,7 @@ export const MainView = () => {
                           }}
                         >
                           Logout
-                        </Button>
+                        </Button> */}
                       </Col>
                     ))}
                   </>
