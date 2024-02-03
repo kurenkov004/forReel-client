@@ -11,7 +11,7 @@ export const MovieCard = ({ movieData }) => { //destructured props argument that
       <Card.Body>
         <Card.Title>{movieData.Title}</Card.Title>
         <Card.Text>{movieData.Director.Name}</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie.id)}`} >
+        <Link to={`/movies/${encodeURIComponent(movieData._id)}`} >
           <Button variant="link">Open</Button>
         </Link>
       </Card.Body>
