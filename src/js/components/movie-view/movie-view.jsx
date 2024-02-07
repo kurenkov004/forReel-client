@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
 
-export const MovieView = ({ movies }) => { // movies in this case is brought in from MainView
+export const MovieView = ({ movies, addFav, removeFav }) => { // movies in this case is brought in from MainView
   const { movieId } = useParams(); //fetching the movieId parameter from the  URL
 
   const movie = movies.find((movie) => movie._id === movieId) //searching through the movies array we fetched from the API to find one movie
@@ -31,6 +31,8 @@ export const MovieView = ({ movies }) => { // movies in this case is brought in 
         <span>Director: </span>
         <span>{movie.Director.Name}</span>
       </div>
+      <Button onClick={addFav}>Add to favourites</Button>
+      <Button onClick={removeFav}>Remove from favourites</Button>
       <Link to={`/movies`} >
         <Button variant="secondary">Back</Button>
       </Link>
