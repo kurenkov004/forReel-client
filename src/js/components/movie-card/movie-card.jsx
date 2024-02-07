@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./movie-card.scss";
 
-export const MovieCard = ({ movieData }) => { //destructured props argument that lets BookCard access data from MainView file
+export const MovieCard = ({ movieData, addFav, removeFav }) => { //destructured props argument that lets BookCard access data from MainView file - movieData has to match the props name passed in MainView
   return (
     <Card className="h-100">
       <Card.Img variant="top" src={movieData.ImagePath} />
@@ -14,6 +14,8 @@ export const MovieCard = ({ movieData }) => { //destructured props argument that
         <Link to={`/movies/${encodeURIComponent(movieData._id)}`} >
           <Button variant="link">Open</Button>
         </Link>
+        <Button onClick={addFav}>Add to favourites</Button>
+        <Button onClick={removeFav}>Remove from favourites</Button>
       </Card.Body>
     </Card>
   );
