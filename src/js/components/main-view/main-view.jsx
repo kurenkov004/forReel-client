@@ -4,6 +4,8 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
+import { useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -17,11 +19,15 @@ export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
 
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]); // movies is assigned the current state, setMovies is the method that updates the movies variable
   const [selectedMovie, setSelectedMovie] = useState(null); // another state variable, sets the initial value to null
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
+  
+ 
+  
+  //fetch all movies from Heroku API
   useEffect(() => {
     if (!token) {
       return;
@@ -37,6 +43,40 @@ export const MainView = () => {
   }, [token]);
 
   console.log(movies);
+
+  //add movie to Favourites
+  const addFav = (id) => {
+
+    fetch(`https://for-reel-d14227c07855.herokuapp.com/users/${user.Username}/movies/${id}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` }
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        alert("Could not add to favourites");
+      }
+    }).catch(error => {
+      console.error('Error: ', error);
+    });
+  };
+
+  //remove movie from Favourites
+  const removeFav = (id) => {
+    fetch(`https://for-reel-d14227c07855.herokuapp.com/users/${user.Username}/movies/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        alert("Could not remove from favourites");
+      }
+    }).catch(error => {
+      console.error('Error: ', error);
+    });
+  }
+
 
   return (
     <BrowserRouter>
@@ -93,7 +133,11 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col>
-                    <MovieView movies={movies} />
+                    <MovieView
+                      movies={movies}
+                      addFav={addFav}
+                      removeFav={removeFav}
+                    />
                   </Col>
                 )}
               </>
@@ -111,18 +155,11 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-5" key={movie.id} md={3}>
-                        <MovieCard movieData={movie} />
-                        {/* <Button
-                          variant="primary"
-                          type="logout"
-                          onClick={() => {
-                            setUser(null);
-                            setToken(null);
-                            localStorage.clear();
-                          }}
-                        >
-                          Logout
-                        </Button> */}
+                        <MovieCard
+                          movieData={movie}
+                          addFav={addFav}
+                          removeFav={removeFav}
+                        />
                       </Col>
                     ))}
                   </>
@@ -142,21 +179,33 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-5" key={movie.id} md={3}>
-                        <MovieCard movieData={movie} />
-                        {/* <Button
-                          variant="primary"
-                          type="logout"
-                          onClick={() => {
-                            setUser(null);
-                            setToken(null);
-                            localStorage.clear();
-                          }}
-                        >
-                          Logout
-                        </Button> */}
+                        <MovieCard 
+                          movieData={movie}
+                          addFav={addFav}
+                          removeFav={removeFav}
+                        />
                       </Col>
                     ))}
                   </>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                      <Col>
+                        <ProfileView
+                          user={user}
+                          movies={movies}
+                          setUser={setUser}
+                          addFav={addFav}
+                          removeFav={removeFav} />
+                      </Col>
                 )}
               </>
             }
