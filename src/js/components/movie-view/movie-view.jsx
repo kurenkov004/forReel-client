@@ -31,8 +31,8 @@ export const MovieView = ({ movies, addFav, removeFav }) => { // movies in this 
         <span>Director: </span>
         <span>{movie.Director.Name}</span>
       </div>
-      <Button onClick={addFav}>Add to favourites</Button>
-      <Button onClick={removeFav}>Remove from favourites</Button>
+      <Button onClick={() => addFav(movie._id)}>Favourite</Button>
+      <Button onClick={() => removeFav(movie._id)}>Unfavourite</Button>
       <Link to={`/movies`} >
         <Button variant="secondary">Back</Button>
       </Link>
@@ -52,5 +52,5 @@ MovieView.propTypes = {
       Name: PropTypes.string.isRequired,
     }),
     ImagePath: PropTypes.string,
-  }).isRequired
+  })
 };
