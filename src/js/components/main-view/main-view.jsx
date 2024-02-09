@@ -56,6 +56,11 @@ export const MainView = () => {
       } else {
         alert("Could not add to favourites");
       }
+    }).then((user) => {
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+      }
     }).catch(error => {
       console.error('Error: ', error);
     });
@@ -71,6 +76,11 @@ export const MainView = () => {
         return response.json();
       } else {
         alert("Could not remove from favourites");
+      }
+    }).then((user) => {
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
       }
     }).catch(error => {
       console.error('Error: ', error);
