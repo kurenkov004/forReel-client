@@ -20,7 +20,7 @@ export const ProfileView = ({ user, movies, setUser, addFav, removeFav  }) => {
   const navigate = useNavigate();
 
   //filter out a user's favourite movies
-  const favouriteMovies = movies.filter((favouriteMovies) => user.FavouriteMovies.includes(favouriteMovies._id));
+  const favouriteMovies = movies.filter(m => user.FavouriteMovies.includes(m._id));
 
   // update user info
   const updateProfileInfo = (event) => {
@@ -141,7 +141,7 @@ export const ProfileView = ({ user, movies, setUser, addFav, removeFav  }) => {
     <Row>
       <h2>Favourite Movies</h2>
           <Row>
-            { favouriteMovies.length === 0 ? 
+            { favouriteMovies.length !== 0 ? 
               favouriteMovies.map((movie) => (
                 <Col className="mb-5" key={movie._id} md={3}>
                   <MovieCard
