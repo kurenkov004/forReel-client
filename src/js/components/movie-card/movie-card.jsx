@@ -14,8 +14,8 @@ export const MovieCard = ({ movieData, addFav, removeFav }) => { //destructured 
         <Link to={`/movies/${encodeURIComponent(movieData._id)}`} >
           <Button variant="link">Open</Button>
         </Link>
-        <Button onClick={addFav}>Add to favourites</Button>
-        <Button onClick={removeFav}>Remove from favourites</Button>
+        <Button onClick={() => addFav(movieData._id)}>Favourite</Button>
+        <Button onClick={() => removeFav(movieData._id)}>Unfavourite</Button>
       </Card.Body>
     </Card>
   );
