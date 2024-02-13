@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 
 import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
+import {BookmarkStar, BookmarkStarFill } from 'react-bootstrap-icons';
 
-export const MovieView = ({ movies, addFav, removeFav }) => { // movies in this case is brought in from MainView
+export const MovieView = ({ movies, user, addFav, removeFav }) => { // movies in this case is brought in from MainView
   const { movieId } = useParams(); //fetching the movieId parameter from the  URL
 
   const movie = movies.find((movie) => movie._id === movieId) //searching through the movies array we fetched from the API to find one movie
 
   return ( //remember, there can only be ONE root element in a component
-    <div>
+    <div className="movie-view">
       <div>
         <img src={movie.ImagePath} />
       </div>
@@ -31,11 +32,16 @@ export const MovieView = ({ movies, addFav, removeFav }) => { // movies in this 
         <span>Director: </span>
         <span>{movie.Director.Name}</span>
       </div>
-      <Button onClick={() => addFav(movie._id)}>Favourite</Button>
-      <Button onClick={() => removeFav(movie._id)}>Unfavourite</Button>
       <Link to={`/movies`} >
         <Button variant="secondary">Back</Button>
       </Link>
+      <div>
+        {user.FavouriteMovies.includes(movie._id) ? (
+          <BookmarkStarFill size={40} color="#A4C1C4" className="fav-button mt-2 me-2 top-0 end-0" onClick={() => removeFav(movie._id)}/>
+        ) : (
+          <BookmarkStar size={40} color="#A4C1C4" className="fav-button mt-2 me-2 top-0 end-0" onClick={() => addFav(movie._id)}/>
+        )}
+      </div>
     </div>
   );
 };
