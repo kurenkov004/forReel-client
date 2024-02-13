@@ -4,9 +4,14 @@ $color: steelblue;
 
 .for-reel {
   color: $color;
+  font-family: 'Recursive', sans-serif;
+
 }
 
-$primary: CadetBlue;
-$body-bg: MintCream;
+$primary: #A4C1C4;
+$body-bg: #002538;
+$body-color: MintCream;
+
+
 
 @import '~bootstrap/scss/bootstrap.scss';
