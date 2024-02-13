@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router';
 import { MovieCard } from '../movie-card/movie-card';
 import {Col, Row, Container, Button, Card, Form } from 'react-bootstrap';
 
+import "./profile-view.scss";
+
 export const ProfileView = ({ user, movies, setUser, addFav, removeFav  }) => {
   // State to store and update Profile username
   const [username, setUsername] = useState(user.Username);
@@ -41,12 +43,12 @@ export const ProfileView = ({ user, movies, setUser, addFav, removeFav  }) => {
       headers: { Authorization: `Bearer ${token}` }
 
     }).then(async(response) => {
-      console.log(response)
       if (response.ok) {
         const updatedUser = await response.json();
         localStorage.setItem('user', JSON.stringify(updatedUser));
         setUser(updatedUser);
         alert("Updated user info successfully");
+        console.log(updatedUser);
       } else {
         alert("Could not update user info")
       }
@@ -72,82 +74,96 @@ export const ProfileView = ({ user, movies, setUser, addFav, removeFav  }) => {
     }
 
 
-
-  console.log(user);
+    //debugging console.log below
+  // console.log(user);
 
   return (
     <Container>
       <Row>
-        <h2>My Profile</h2>
-        {user ? (
-          <div>
-            <p>Username: {user.Username}</p>
-            <p>Email: {user.Email}</p>
-            <p>Birthday: {user.Birthday}</p>
-            {/* Add more user information fields as needed */}
-          </div>
-        ) : (
-          <p>No user data available.</p>
-        )}
-        <Form onSubmit={updateProfileInfo}>
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control 
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            minLength="3"
-          />
-        </Form.Group>
+        <Col xs={12} sm={4} >
+          <Card>
+            <Card.Body>
+              <h2>My Profile</h2>
+              {user ? (
+                <div>
+                  <p>Username: {user.Username}</p>
+                  <p>Email: {user.Email}</p>
+                  <p>Birthday: {user.Birthday}</p>
+                  {/* Add more user information fields as needed */}
+                </div>
+              ) : (
+                <p>No user data available.</p>
+              )}
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={12} sm={8} >
+          <Card>
+            <Card.Body>
+              <h2>Update Profile Info</h2>  
+              <Form onSubmit={updateProfileInfo}>
+                <Form.Group controlId="formUsername">
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control 
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    minLength="3"
+                  />
+                </Form.Group>
 
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control 
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control 
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group controlId="formEmail">
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control 
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </Form.Group>
 
-        <Form.Group controlId="formEmail">
-          <Form.Label>Email:</Form.Label>
-          <Form.Control 
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formBirthday">
-          <Form.Label>Birthday:</Form.Label>
-          <Form.Control 
-            type="date"
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Update information
-        </Button>
-        <Button onClick={deleteUserInfo} variant="secondary">
-          Delete User
-        </Button>
-      </Form>
-    </Row>
-    <Row>
-      <h2>Favourite Movies</h2>
+                <Form.Group controlId="formBirthday">
+                  <Form.Label>Birthday:</Form.Label>
+                  <Form.Control 
+                    type="date"
+                    value={birthday}
+                    onChange={(e) => setBirthday(e.target.value)}
+                    // required
+                  />
+                </Form.Group>
+                <Button variant="primary" type="submit" className='update-button'>
+                  Update information
+                </Button>
+                <Button onClick={deleteUserInfo} variant="danger" className='delete-button' >
+                  Delete User
+                </Button>
+              </Form>      
+            </Card.Body>
+          </Card>
+          
+        </Col>
+      </Row>
+      <Row>
+          <h2>Favourite Movies</h2>
           <Row>
             { favouriteMovies.length !== 0 ? 
               favouriteMovies.map((movie) => (
-                <Col className="mb-5" key={movie._id} md={3}>
+                <Col className="mb-5" key={movie._id} xs={12} sm={8} md={4} lg={3} >
                   <MovieCard
                     movieData={movie}
                     removeFav={removeFav}
                     addFav={addFav}
+                    isFav={user.FavouriteMovies.includes(movie._id)}
                   />
                 </Col>
               )) :
@@ -156,7 +172,7 @@ export const ProfileView = ({ user, movies, setUser, addFav, removeFav  }) => {
                 </Col>   
             }
           </Row>
-    </Row>
+      </Row>
     </Container>
   );
 };
