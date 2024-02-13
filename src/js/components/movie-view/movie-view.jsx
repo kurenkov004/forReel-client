@@ -1,30 +1,47 @@
 import PropTypes from "prop-types"; //imports PropTypes Library
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+
 import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
+import {BookmarkStar, BookmarkStarFill } from 'react-bootstrap-icons';
 
-export const MovieView = ({ expandedMovie, onBackClick }) => {
+export const MovieView = ({ movies, user, addFav, removeFav }) => { // movies in this case is brought in from MainView
+  const { movieId } = useParams(); //fetching the movieId parameter from the  URL
+
+  const movie = movies.find((movie) => movie._id === movieId) //searching through the movies array we fetched from the API to find one movie
+
   return ( //remember, there can only be ONE root element in a component
-    <div>
+    <div className="movie-view">
       <div>
-        <img src={expandedMovie.ImagePath} />
+        <img src={movie.ImagePath} />
       </div>
       <div>
         <span>Title: </span>
-        <span>{expandedMovie.Title}</span>
+        <span>{movie.Title}</span>
       </div>
       <div>
         <span>Description: </span>
-        <span>{expandedMovie.Description}</span>
+        <span>{movie.Description}</span>
       </div>
       <div>
         <span>Genre: </span>
-        <span>{expandedMovie.Genre.Name}</span>
+        <span>{movie.Genre.Name}</span>
       </div>
       <div>
         <span>Director: </span>
-        <span>{expandedMovie.Director.Name}</span>
+        <span>{movie.Director.Name}</span>
       </div>
-      <Button variant="secondary" onClick={onBackClick}>Back</Button>
+      <Link to={`/movies`} >
+        <Button variant="secondary">Back</Button>
+      </Link>
+      <div>
+        {user.FavouriteMovies.includes(movie._id) ? (
+          <BookmarkStarFill size={40} color="#A4C1C4" className="fav-button mt-2 me-2 top-0 end-0" onClick={() => removeFav(movie._id)}/>
+        ) : (
+          <BookmarkStar size={40} color="#A4C1C4" className="fav-button mt-2 me-2 top-0 end-0" onClick={() => addFav(movie._id)}/>
+        )}
+      </div>
     </div>
   );
 };
@@ -41,5 +58,5 @@ MovieView.propTypes = {
       Name: PropTypes.string.isRequired,
     }),
     ImagePath: PropTypes.string,
-  }).isRequired
+  })
 };
