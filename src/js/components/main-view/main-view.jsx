@@ -147,6 +147,7 @@ export const MainView = () => {
                       movies={movies}
                       addFav={addFav}
                       removeFav={removeFav}
+                      user={user}
                     />
                   </Col>
                 )}
@@ -169,6 +170,7 @@ export const MainView = () => {
                           movieData={movie}
                           addFav={addFav}
                           removeFav={removeFav}
+                          isFav={user.FavouriteMovies.includes(movie._id)}
                         />
                       </Col>
                     ))}
@@ -193,6 +195,7 @@ export const MainView = () => {
                           movieData={movie}
                           addFav={addFav}
                           removeFav={removeFav}
+                          isFav={user.FavouriteMovies.includes(movie._id)}
                         />
                       </Col>
                     ))}
