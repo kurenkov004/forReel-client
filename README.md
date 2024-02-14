@@ -5,7 +5,7 @@ This is a single-page, responsive app  which supports an existing server-side RE
 The interface allows movie enthusiasts to create an account and browse through a collection of movies, finding out more information about each picture, as well as saving any particular favourites to their profile. 
 
 ## Sample View
-![screenshot of the forReel home page](src\img\for-ree-page-samle_MK_240213.jpg)
+.\src\img\for-ree-page-samle_MK_240213.jpg
 
 ## Key Dependencies
 - bootstrap
