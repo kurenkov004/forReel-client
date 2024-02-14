@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import { useNavigate } from 'react-router';
 import { MovieCard } from '../movie-card/movie-card';
 import {Col, Row, Container, Button, Card, Form } from 'react-bootstrap';
@@ -88,8 +89,8 @@ export const ProfileView = ({ user, movies, setUser, addFav, removeFav  }) => {
                 <div>
                   <p>Username: {user.Username}</p>
                   <p>Email: {user.Email}</p>
-                  <p>Birthday: {user.Birthday}</p>
-                  {/* Add more user information fields as needed */}
+                  {/* <p>Birthday: {user.Birthday}</p> */}
+                  <p>Birthday: {moment(user.Birthday).utc().format('yyyy-MM-dd')}</p>
                 </div>
               ) : (
                 <p>No user data available.</p>
