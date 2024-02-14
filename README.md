@@ -4,6 +4,9 @@ This is a single-page, responsive app  which supports an existing server-side RE
 
 The interface allows movie enthusiasts to create an account and browse through a collection of movies, finding out more information about each picture, as well as saving any particular favourites to their profile. 
 
+## Sample View
+![screenshot of the forReel home page](src\img\for-ree-page-samle_MK_240213.jpg)
+
 ## Key Dependencies
 - bootstrap
 - bootstrap-icons
@@ -21,8 +24,12 @@ The interface allows movie enthusiasts to create an account and browse through a
 ## Link to API
  movie_api https://for-reel-d14227c07855.herokuapp.com
 
-## Link to ForReel App
-For_Reel [(for-reel.netlify.app)]
+## Link to Live ForReel App
+For-Reel https://for-reel.netlify.app
+
+## Link to GitHub Repository
+ movie_api - main brach:  https://github.com/kurenkov004/forReel-client
+
 ## Key Components
 ### Login View
 - Allows users to log in with a username and password
