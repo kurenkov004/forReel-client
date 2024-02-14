@@ -19,10 +19,10 @@ The interface allows movie enthusiasts to create an account and browse through a
 - parcel/transformer-sass: (^2.10.2)
 
 ## Link to API
- movie_api (https://for-reel-d14227c07855.herokuapp.com)
+ movie_api https://for-reel-d14227c07855.herokuapp.com
 
 ## Link to ForReel App
-For_Reel (for-reel.netlify.app)
+For_Reel [(for-reel.netlify.app)]
 ## Key Components
 ### Login View
 - Allows users to log in with a username and password
