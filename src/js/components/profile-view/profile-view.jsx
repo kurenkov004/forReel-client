@@ -89,7 +89,6 @@ export const ProfileView = ({ user, movies, setUser, addFav, removeFav  }) => {
                 <div>
                   <p>Username: {user.Username}</p>
                   <p>Email: {user.Email}</p>
-                  {/* <p>Birthday: {user.Birthday}</p> */}
                   <p>Birthday: {moment(user.Birthday).utc().format('yyyy-MM-DD')}</p>
                 </div>
               ) : (
