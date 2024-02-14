@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
@@ -6,12 +7,10 @@ import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { useParams } from "react-router-dom";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import {Col, Row, Container, Button, Card, Form } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./main-view.scss";
-import React from "react";
+
 
 //this exposes the MainView component so it can be brought into index.jsx
 export const MainView = () => {
@@ -23,6 +22,7 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null); // another state variable, sets the initial value to null
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [search, setSearch] = useState(""); //useState for search function
 
   
  
@@ -164,8 +164,21 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
-                      <Col className="mb-5" key={movie.id} md={3}>
+                    <Form className="movie-search">
+                      <Form.Control
+                        className="mx-5 mx-md-0"
+                        type="search"
+                        id="searchForm"
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Enter movie title ..."
+                      />
+                    </Form>
+                    {movies.filter((movie) => {
+                      return search === ""
+                      ? movie
+                      : movie.Title.toLowerCase().includes(search.toLowerCase());
+                    }).map((movie) => (
+                      <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard
                           movieData={movie}
                           addFav={addFav}
@@ -189,9 +202,22 @@ export const MainView = () => {
                   <Col>No movies here</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
-                      <Col className="mb-5" key={movie.id} md={3}>
-                        <MovieCard 
+                    <Form className="movie-search">
+                      <Form.Control
+                        className="mx-5 mx-md-0"
+                        type="search"
+                        id="searchForm"
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Enter movie title ..."
+                      />
+                    </Form>
+                    {movies.filter((movie) => {
+                      return search === ""
+                      ? movie
+                      : movie.Title.toLowerCase().includes(search.toLowerCase());
+                    }).map((movie) => (
+                      <Col className="mb-5" key={movie._id} md={3}>
+                        <MovieCard
                           movieData={movie}
                           addFav={addFav}
                           removeFav={removeFav}
